@@ -12,6 +12,28 @@ function index (req, res) {
 }
 
 
+function show(req, res) {
+
+}
+
+function create(req, res) {
+
+}
+
+function update(req, res) {
+
+}
+
+function deleteCity(req, res) {
+
+}
+
+
 export {
   index,
+  show,
+  create,
+  update,
+  deleteCity as delete,
+  
 }

@@ -14,6 +14,9 @@ router.get('/', citiesCtrl.index)
 
 /* ----------- Private Routes ----------- */ 
 router.use(decodeUserFromToken)
+router.post('/', checkAuth, citiesCtrl.create)
+router.put('/:id', checkAuth, citiesCtrl.update)
+router.delete('/:id', checkAuth, citiesCtrl.delete)
 
 export {
   router
