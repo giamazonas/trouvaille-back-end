@@ -1,2 +1,1 @@
-import { Itinerary } from "../models/itinerary";
-//comment
+import { Itinerary } from '../models/itinerary'
