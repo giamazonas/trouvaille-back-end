@@ -33,9 +33,11 @@ pic of what....
 ![add new]()
 <br>
 <br>
-Wireframe
+
+
 
 ![wireframe](/trouvaille-front-end/public/wireframe.png)
+
 <br>
 <br>
 
