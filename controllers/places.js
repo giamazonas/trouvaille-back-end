@@ -12,7 +12,7 @@ function update(req, res) {
 
 }
 
-function deleteItinerary(req, res) {
+function deletePlace(req, res) {
 
 }
 

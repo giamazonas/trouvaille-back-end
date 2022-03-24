@@ -8,7 +8,7 @@ const router = Router()
 
 /* ----------- Public Routes ----------- */ 
 router.get('/', citiesCtrl.index)
-=======
+
 
 
 
