@@ -13,9 +13,9 @@ router.get('/:id', citiesCtrl.show)
 
 /* ----------- Private Routes ----------- */ 
 router.use(decodeUserFromToken)
-router.post('/', checkAuth, citiesCtrl.create)
-router.put('/:id', checkAuth, citiesCtrl.update)
-router.delete('/:id', checkAuth, citiesCtrl.delete)
+router.post('/add', checkAuth, citiesCtrl.create)
+router.put('/:id/edit', checkAuth, citiesCtrl.update)
+router.delete('/:id/edit', checkAuth, citiesCtrl.delete)
 
 export {
   router
