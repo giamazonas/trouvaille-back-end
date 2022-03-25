@@ -13,7 +13,19 @@ function index(req, res) {
 }
 
 function show(req, res) {
-
+  Itinerary.findById(req.params.id)
+  .populate("owner")
+  .then(itinerary => {
+    console.log(itinerary)
+    res.render('itineraries/show', {
+      itinerary,
+      title: "i"
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/itineraries")
+  })
 }
 
 function create(req, res) {
