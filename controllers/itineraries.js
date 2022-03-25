@@ -1,4 +1,4 @@
-import { Itinerary } from '../models/itinerary'
+import { Itinerary } from '../models/itinerary.js'
 
 function show(req, res) {
 
