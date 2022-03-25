@@ -7,9 +7,9 @@ const citySchema = new Schema({
   city: { type: String, required: true, lowercase: true, unique: true },
   owner: { type: Schema.Types.ObjectId, ref: 'Profile' },
   places: [{ type: Schema.Types.ObjectId, ref: 'Place' }],
-  population: { type: Number, required: true },
+  population: { type: String, required: true },
   state: { type: String, required: true, lowercase: true, unique: true },
-  walkable: { type: Boolean, required: true, default: true },
+  walkable: { type: Boolean, default: true },
   zip: { type: [String] },
   photo: { type: [String] },
 }, {

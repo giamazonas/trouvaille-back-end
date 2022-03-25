@@ -18,13 +18,16 @@ function show(req, res) {
 }
 
 function create(req, res) {
+  console.log('hello')
   City.create(req.body)
+  console.log('line 22', req.body)
   .then(city => {
-    city.populate('city')  //check in quotes 
+    city.populate('city') 
     .then(populatedCity => {
       res.status(201).json(populatedCity)
     })
   })
+  console.log('city', City.req.body)
   .catch(err => {
     console.log(err)
     res.status(500).json(err)
