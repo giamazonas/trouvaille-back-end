@@ -33,11 +33,13 @@ function create(req, res) {
 }
 
 function update(req, res) {
-
+  
 }
 
 function deleteItinerary(req, res) {
-
+  Itinerary.findByIdAndDelete(req.params.id)
+  .then(itinerary => res.json(itinerary))
+  .catch(err => res.json(err))
 }
 
 export {
