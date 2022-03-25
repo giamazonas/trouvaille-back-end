@@ -39,6 +39,16 @@ function update(req, res) {
   })
 }
 
+function edit(req, res) {
+  City.findById(req.params.id, req.body)
+  .then(city => res.json(city))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
+
 function deleteCity(req, res) {
   City.findByIdAndDelete(req.params.id)
   .then(city => res.json(city))
@@ -53,6 +63,7 @@ export {
   show,
   create,
   update,
+  edit,
   deleteCity as delete,
   
 }
