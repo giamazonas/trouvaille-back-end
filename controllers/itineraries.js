@@ -1,5 +1,17 @@
 import { Itinerary } from '../models/itinerary.js'
 
+function index(req, res) {
+  console.log('itineraries')
+  Itinerary.find({})
+  .populate('owner')
+  .then(itineraries => {
+    res.json(itineraries)
+  })
+  .catch(err => {
+    res.json(err)
+  })
+}
+
 function show(req, res) {
 
 }
@@ -17,6 +29,7 @@ function deleteItinerary(req, res) {
 }
 
 export {
+  index,
   show,
   create,
   update,
