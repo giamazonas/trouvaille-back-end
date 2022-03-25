@@ -8,7 +8,8 @@ const router = Router()
 
 /* ----------- Public Routes ----------- */ 
 router.get('/', citiesCtrl.index)
-router.get('/:id', citiesCtrl.show)
+
+
 
 
 /* ----------- Private Routes ----------- */ 
