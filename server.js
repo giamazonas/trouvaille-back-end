@@ -6,6 +6,8 @@ import cors from 'cors'
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as citiesRouter } from './routes/cities.js'
+import { router as placesRouter } from './routes/places.js' 
+import {router as itinerariesRouter } from './routes/itineraries.js'
 
 import('./config/database.js')
 
@@ -18,6 +20,8 @@ app.use(express.json())
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/cities', citiesRouter)
+app.use('/api/places', placesRouter)
+app.use('/api/itineraries', itinerariesRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: "Not found" })
