@@ -8,7 +8,6 @@ const router = Router()
 /* ----------- Public Routes ----------- */ 
 router.get('/', citiesCtrl.index)
 
-
 /* ----------- Private Routes ----------- */ 
 router.use(decodeUserFromToken)
 router.post('/add', checkAuth, citiesCtrl.create)
