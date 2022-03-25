@@ -12,6 +12,7 @@ router.get('/', citiesCtrl.index)
 router.use(decodeUserFromToken)
 router.post('/add', checkAuth, citiesCtrl.create)
 router.put('/:id', checkAuth, citiesCtrl.update)
+router.get('/:id/edit', checkAuth, citiesCtrl.edit)
 router.delete('/:id', checkAuth, citiesCtrl.delete)
 
 export {
