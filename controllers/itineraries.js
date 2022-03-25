@@ -19,7 +19,7 @@ function show(req, res) {
       console.log(itinerary)
       res.render('itineraries/:id', {
         itinerary,
-        title: "i"
+        title: "Itinerary"
       })
     })
     .catch(err => {
