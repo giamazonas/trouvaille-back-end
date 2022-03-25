@@ -16,6 +16,7 @@ const placeSchema = new Schema({
   name: { type: String, required: true },
   owner: { type: Schema.Types.ObjectId, ref: 'Profile' },
   type: { type: String, enum: ['restaurant', 'bar', 'park', 'coffee', 'movie-theatre', 'museum', 'bowling', 'arcade', 'shop'] },
+
   url: { type: String },
   reviews: [reviewSchema],
   photo: { type: [String] }
