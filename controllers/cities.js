@@ -11,13 +11,27 @@ function index (req, res) {
   })
 }
 
-
 function show(req, res) {
-
+  City.findById(req.params.id)
+  .then(city => res.json(city))
+  .catch(err => res.json(err))
 }
 
 function create(req, res) {
-
+  console.log('hello')
+  City.create(req.body)
+  console.log('line 22', req.body)
+  .then(city => {
+    city.populate('city') 
+    .then(populatedCity => {
+      res.status(201).json(populatedCity)
+    })
+  })
+  console.log('city', City.req.body)
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 }
 
 function update(req, res) {
