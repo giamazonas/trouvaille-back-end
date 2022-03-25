@@ -17,7 +17,7 @@ function show(req, res) {
   .populate("owner")
   .then(itinerary => {
     console.log(itinerary)
-    res.render('itineraries/show', {
+    res.render('itineraries/:id', {
       itinerary,
       title: "i"
     })
