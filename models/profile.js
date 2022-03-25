@@ -6,8 +6,8 @@ const profileSchema = new mongoose.Schema({
   email: {type: String, required: true, lowercase: true, unique: true},
   name: String,
   // isAdmin: { type: Boolean, required: true, default: false },
-  itineraries: [{ type: Schema.Types.ObjectID, ref: 'Itinerary' }],
-  starred: [{ type: Schema.Types.ObjectID, ref: 'Place' }]
+  itineraries: [{ type: Schema.Types.ObjectId, ref: 'Itinerary' }],
+  starred: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
 },{
     timestamps: true,
 })
