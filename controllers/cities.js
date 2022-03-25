@@ -11,13 +11,24 @@ function index (req, res) {
   })
 }
 
-
 function show(req, res) {
-
+  City.findById(req.params.id)
+  .then(city => res.json(city))
+  .catch(err => res.json(err))
 }
 
 function create(req, res) {
-
+  City.create(req.body)
+  .then(city => {
+    city.populate('city')  //check in quotes 
+    .then(populatedCity => {
+      res.status(201).json(populatedCity)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 }
 
 function update(req, res) {
