@@ -21,13 +21,24 @@ function create(req, res) {
 }
 
 function update(req, res) {
-
+  City.findByIdAndUpdate(req.params.id, req.body, {new:true})
+  .then(city => {
+    city.populate("city") //is "city" correct in this field? check create also
+    .then(populateCity => {
+      res.status(201).json(populateCity)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 }
 
 function deleteCity(req, res) {
-
+  City.findByIdAndDelete(req.params.id)
+  .then(city => res.json(city))
+  .catch(err => res.json(err))
 }
-
 
 export {
   index,
