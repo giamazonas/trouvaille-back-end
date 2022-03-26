@@ -6,10 +6,12 @@ const router = Router();
 
 /* ----------- Public Routes ----------- */
 router.get("/", citiesCtrl.index);
-router.get("/:id", citiesCtrl.show);
 
 /* ----------- Private Routes ----------- */
+router.get("/", async (req, res) => {
+  res.send(req.query.location)})
 router.use(decodeUserFromToken);
+router.get("/:id", citiesCtrl.show);
 router.post("/", checkAuth, citiesCtrl.create);
 router.put("/:id", checkAuth, citiesCtrl.update);
 router.get("/:id/edit", checkAuth, citiesCtrl.edit);

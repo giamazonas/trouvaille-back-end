@@ -3,7 +3,7 @@ import { City } from "../models/city.js";
 function index(req, res) {
   console.log("SEARCH idx function CITY", req.query);
   const error = req.query.error;
-  if (req.query.id) {
+  if (req.query.City) {
     console.log("HITTING IF CONDITION");
     City.findById(req.query.city.city)
       .populate("city")
@@ -15,12 +15,12 @@ function index(req, res) {
             error,
           });
         } else {
-          res.redirect("/cities?error=true");
+          throw new Error('Check spelling or try new search')  
         }
       });
   } else {
     City.find({}).then((cities) => res.json(cities));
-  }
+  } 
 }
 
 function show(req, res) {
