@@ -1,55 +1,58 @@
-import { Place } from '../models/place.js'
+import { Place } from "../models/place.js";
 
 function index(req, res) {
   Place.find({})
-  .then(places => res.json(places))
-  .catch(err => {
-    console.log(err)
-    res.status(500).json(err)
-  })
+    .then((places) => res.json(places))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 }
 
 function show(req, res) {
   Place.findById(req.params.id)
-  .then(place => res.json(place))
-  .catch(err => res.json(err))
+    .then((place) => res.json(place))
+    .catch((err) => res.json(err));
 }
 
 function create(req, res) {
-  console.log('========= req.body place controller: ========', req.body)
+  console.log("========= req.body place controller: ========", req.body);
 
   Place.create(req.body)
-  .then(place => res.json(place))
-  .catch(err => {
-    console.log(err)
-    res.status(500).json(err)
-  })
+    .then((place) => res.json(place))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 }
 
 function update(req, res) {
-  Place.findByIdAndUpdate(req.params.id, req.body, {new:true})
-  .then(place => {
-    place.populate("place") 
-    .then(populatePlace => {
-      res.status(201).json(populatePlace)
+  Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((place) => {
+      place.populate("place").then((populatePlace) => {
+        res.status(201).json(populatePlace);
+      });
     })
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).json(err)
-  })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 }
 
 function deletePlace(req, res) {
   Place.findByIdAndDelete(req.params.id)
-  .then(place => res.json(place))
-  .catch(err => res.json(err))
+    .then((place) => res.json(place))
+    .catch((err) => res.json(err));
 }
 
-export {
-  index,
-  show,
-  create,
-  update,
-  deletePlace as delete
+function createReview(req, res) {
+  console.log("CREATE REVIEW");
+  City.findById(req.params.id, function (err, city) {
+    city.comment.push(req.body);
+    city.save(function (err) {
+      res.redirect(`/city/${city._id}`);
+    });
+  });
 }
+
+export { index, show, create, update, deletePlace as delete };
