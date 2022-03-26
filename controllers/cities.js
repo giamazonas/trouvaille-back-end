@@ -1,14 +1,26 @@
 import { City } from "../models/city.js";
 
 function index(req, res) {
-  City.find({})
-    .populate("owner")
-    .then((cities) => {
-      res.json(cities);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+  console.log("SEARCH idx function CITY", req.query);
+  const error = req.query.error;
+  if (req.query.id) {
+    console.log("HITTING IF CONDITION");
+    City.findById(req.query.city.city)
+      .populate("city")
+      .then((city) => {
+        if (city) {
+          res.render("cities/:id", {
+            city,
+            title: "City",
+            error,
+          });
+        } else {
+          res.redirect("/cities?error=true");
+        }
+      });
+  } else {
+    City.find({}).then((cities) => res.json(cities));
+  }
 }
 
 function show(req, res) {

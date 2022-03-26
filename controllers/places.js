@@ -1,6 +1,11 @@
 import { Place } from "../models/place.js";
 
 function index(req, res) {
+  // console.log('SEARCH idx function PLACE', req.query)
+  // const error = req.query.error;
+  // if(req.query.id) {
+    // console.log('HITTING IF CONDITION')
+  // }
   Place.find({})
     .then((places) => res.json(places))
     .catch((err) => {

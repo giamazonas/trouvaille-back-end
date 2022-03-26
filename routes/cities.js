@@ -13,6 +13,6 @@ router.use(decodeUserFromToken);
 router.post("/", checkAuth, citiesCtrl.create);
 router.put("/:id", checkAuth, citiesCtrl.update);
 router.get("/:id/edit", checkAuth, citiesCtrl.edit);
-router.delete("/:id", checkAuth, citiesCtrl.delete);
+router.delete("/:id/edit", checkAuth, citiesCtrl.delete);
 
 export { router };
