@@ -17,4 +17,6 @@ router.put("/:id", checkAuth, citiesCtrl.update);
 router.get("/:id/edit", checkAuth, citiesCtrl.edit);
 router.delete("/:id/edit", checkAuth, citiesCtrl.delete);
 
+
 export { router };
+
