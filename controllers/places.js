@@ -1,7 +1,6 @@
 import { Place } from '../models/place.js'
 
 function index(req, res) {
-  console.log('PLACES CONTROLLER INDEX')
   Place.find({})
   .then(places => res.json(places))
   .catch(err => {
@@ -17,14 +16,10 @@ function show(req, res) {
 }
 
 function create(req, res) {
+  console.log('========= req.body place controller: ========', req.body)
+
   Place.create(req.body)
-  .then(place => {
-    place.populate('place') 
-    .then(populatedPlace => {
-      res.status(201).json(populatedPlace)
-    })
-  })
-  console.log('place', Place.req.body)
+  .then(place => res.json(place))
   .catch(err => {
     console.log(err)
     res.status(500).json(err)
