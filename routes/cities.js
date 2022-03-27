@@ -12,6 +12,7 @@ router.get("/:id", citiesCtrl.show);
 router.use(decodeUserFromToken);
 router.post("/", checkAuth, citiesCtrl.create);
 router.put("/:id", checkAuth, citiesCtrl.update);
+router.patch("/:cityId/:placeId", checkAuth, citiesCtrl.addPlace);
 router.get("/:id/edit", checkAuth, citiesCtrl.edit);
 router.delete("/:id/edit", checkAuth, citiesCtrl.delete);
 
