@@ -17,4 +17,3 @@ router.delete("/:id/edit", checkAuth, citiesCtrl.delete);
 
 
 export { router };
-
