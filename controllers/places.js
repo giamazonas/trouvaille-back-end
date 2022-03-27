@@ -60,4 +60,4 @@ function createReview(req, res) {
   });
 }
 
-export { index, show, create, update, deletePlace as delete };
+export { index, show, create, update, createReview, deletePlace as delete };
