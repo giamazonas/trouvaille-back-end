@@ -17,7 +17,7 @@ function show(req, res) {
     city
       .populate("places")
       .then((populatedCity) => {
-        console.log("::: POPULATEDCITY :::", populatedCity);
+        console.log("::: POPULATEDCITY SHOW FUNCTION  :::", populatedCity);
         res.status(201).json(populatedCity);
       })
       .catch((err) => {
@@ -72,12 +72,12 @@ function addPlace(req, res) {
 }
 
 function update(req, res) {
-  console.log("update hit", res);
+  console.log("update hit");
   if (req.body.photo === "undefined" || !req.files["photo"]) {
     delete req.body["photo"]
     City.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then((city) => {
-        console.log("first then", city)
+        console.log("first then", req.params.id)
         city.populate("owner").then((populatedCity) => {
           console.log("populte city", populatedCity)
           res.status(201).json(populatedCity)
