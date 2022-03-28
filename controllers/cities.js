@@ -55,6 +55,15 @@ function create(req, res) {
   }
 }
 
+function addPlace(req, res) {
+  console.log('::::: res.params :::::', res.req.params)
+  // City.patch(res.req.params.cityId, {$push: {places: res.req.params.placeId}})
+  City.findByIdAndUpdate(res.req.params.cityId, {$push: {places: res.req.params.placeId}})
+  .then(() => {
+    console.log('ADD PLACE')
+  })
+}
+
 function update(req, res) {
   console.log("update hit", req.body);
   if (req.body.photo === "undefined" || !req.files["photo"]) {
@@ -118,4 +127,12 @@ function deleteCity(req, res) {
     });
 }
 
-export { index, show, create, update, edit, deleteCity as delete };
+export { 
+  index, 
+  show, 
+  create, 
+  update, 
+  addPlace,
+  edit, 
+  deleteCity as delete 
+};

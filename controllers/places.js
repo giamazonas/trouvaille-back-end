@@ -1,5 +1,6 @@
-import { Place } from "../models/place.js";
-import { v2 as cloudinary } from "cloudinary";
+import { Place } from "../models/place.js"
+import { City } from "../models/city.js"
+import { v2 as cloudinary } from "cloudinary"
 
 function index(req, res) {
   Place.find({})
@@ -20,16 +21,27 @@ function show(req, res) {
 }
 
 function create(req, res) {
-  console.log("========= req.body place controller: ========", req.body);
   req.body.owner = req.user.profile;
   if (req.body.photo === "undefined" || !req.files["photo"]) {
+    // console.log(':::req.body.city:::', req.body.city)
     delete req.body["photo"];
     Place.create(req.body)
-      .then((place) => res.json(place))
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+    // .then((place) => {
+      // TESTING ---------V
+
+      // City.patch(req.body.city, {$push: {places: place._id}})
+      // console.log(':::::::::::: city.findById(req.body.city) ::::::::::::',City.findByIdAndUpdate(req.body.city))
+      // City.findByIdAndUpdate(req.body.city, {palces: place._id})
+      // console.log("========= req.body.city place controller: ========", req.body.city)
+      // console.log("+++++++++ place    place controller:+++++++++", place)
+
+      // TESTING ---------^
+    // })
+    .then((place) => res.json(place))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   } else {
     const imageFile = req.files.photo.path;
     cloudinary.uploader
@@ -100,4 +112,11 @@ function createReview(req, res) {
   });
 }
 
-export { index, show, create, update, createReview, deletePlace as delete };
+export { 
+  index, 
+  show, 
+  create, 
+  update, 
+  createReview, 
+  deletePlace as delete 
+}
