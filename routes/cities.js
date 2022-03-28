@@ -9,11 +9,11 @@ router.get("/", citiesCtrl.index);
 
 /* ----------- Private Routes ----------- */
 router.use(decodeUserFromToken);
-router.get("/:id", checkAuth ,citiesCtrl.show);
 router.post("/", checkAuth, citiesCtrl.create);
-router.put("/:id", checkAuth, citiesCtrl.update);
+router.get("/:id", checkAuth ,citiesCtrl.show);
+router.put("/:id/edit", checkAuth, citiesCtrl.update);
 router.patch("/:cityId/:placeId", checkAuth, citiesCtrl.addPlace);
-router.get("/:id/edit", checkAuth, citiesCtrl.edit);
+router.put("/:id/edit", checkAuth, citiesCtrl.edit);
 router.delete("/:id", checkAuth, citiesCtrl.delete);
 
 export { router };
