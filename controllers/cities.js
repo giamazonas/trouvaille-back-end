@@ -116,11 +116,9 @@ function edit(req, res) {
 
 function deleteCity(req, res) {
   City.findByIdAndDelete(req.params.id)
-    .then(() =>
-      res.json({
-        msg: "deleted",
-      })
-    )
+    .then(deletedCity => {
+      res.json(deletedCity)
+    })
     .catch((err) => {
       console.log(err);
       res.json(err);
