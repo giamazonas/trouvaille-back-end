@@ -62,7 +62,6 @@ function create(req, res) {
 
 function addPlace(req, res) {
   console.log('::::: res.params :::::', res.req.params)
-  // City.patch(res.req.params.cityId, {$push: {places: res.req.params.placeId}})
   City.findByIdAndUpdate(res.req.params.cityId, {$push: {places: res.req.params.placeId}})
   .then(() => {
     console.log('ADD PLACE')
