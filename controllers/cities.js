@@ -69,43 +69,42 @@ function addPlace(req, res) {
 }
 
 function update(req, res) {
-  console.log("update hit", req.body);
+  console.log("update hit", req.body)
   if (req.body.photo === "undefined" || !req.files["photo"]) {
-    delete req.body["photo"];
+    delete req.body["photo"]
     City.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then((city) => {
-        console.log("first then", city);
+        console.log("first then", city)
         city.populate("owner").then((populatedCity) => {
-          console.log("populte city", populatedCity);
-          res.status(201).json(populatedCity);
+          console.log("populte city", populatedCity)
+          res.status(201).json(populatedCity)
         });
       })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
     })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
   } else {
-    console.log("hit else clause");
-    const imageFile = req.files.photo.path;
+    console.log("hit else clause")
+    const imageFile = req.files.photo.path
     cloudinary.uploader
       .upload(imageFile, { tags: `${req.body.name}` })
       .then((image) => {
-        console.log(image);
-        req.body.photo = image.url;
+        console.log(image)
+        req.body.photo = image.url
         City.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((city) => {
-            console.log("city", city);
+            console.log("city", city)
             city.populate("owner").then((populatedCity) => {
-              console.log("pop city", populatedCity);
-              res.status(201).json(populatedCity);
-            });
+              console.log("pop city", populatedCity)
+              res.status(201).json(populatedCity)
+            })
           })
           .catch((err) => {
             console.log(err);
-            res.status(500).json(err);
-          });
-      });
+            res.status(500).json(err)
+          })
+    })
   }
 }
 
