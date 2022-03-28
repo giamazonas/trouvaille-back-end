@@ -2,11 +2,6 @@ import { Place } from "../models/place.js";
 import { v2 as cloudinary } from "cloudinary";
 
 function index(req, res) {
-  // console.log('SEARCH idx function PLACE', req.query)
-  // const error = req.query.error;
-  // if(req.query.id) {
-  // console.log('HITTING IF CONDITION')
-  // }
   Place.find({})
     .then((places) => res.json(places))
     .catch((err) => {
@@ -18,7 +13,10 @@ function index(req, res) {
 function show(req, res) {
   Place.findById(req.params.id)
     .then((place) => res.json(place))
-    .catch((err) => res.json(err));
+    .catch((err) => {
+      console.log(err)
+      res.json(err);
+    })
 }
 
 function create(req, res) {
