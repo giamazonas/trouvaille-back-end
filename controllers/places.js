@@ -1,12 +1,8 @@
-import { Place } from "../models/place.js";
-import { v2 as cloudinary } from "cloudinary";
+import { Place } from "../models/place.js"
+import { City } from "../models/city.js"
+import { v2 as cloudinary } from "cloudinary"
 
 function index(req, res) {
-  // console.log('SEARCH idx function PLACE', req.query)
-  // const error = req.query.error;
-  // if(req.query.id) {
-  // console.log('HITTING IF CONDITION')
-  // }
   Place.find({})
     .then((places) => res.json(places))
     .catch((err) => {
@@ -18,20 +14,22 @@ function index(req, res) {
 function show(req, res) {
   Place.findById(req.params.id)
     .then((place) => res.json(place))
-    .catch((err) => res.json(err));
+    .catch((err) => {
+      console.log(err)
+      res.json(err);
+    })
 }
 
 function create(req, res) {
-  console.log("========= req.body place controller: ========", req.body);
-  req.body.owner = req.user.profile;
-  if (req.body.photo === "undefined" || !req.files["photo"]) {
-    delete req.body["photo"];
-    Place.create(req.body)
-      .then((place) => res.json(place))
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      // console.log("+++++++++ place    place controller:+++++++++", place)
+
+      // TESTING ---------^
+    // })
+    .then((place) => res.json(place))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   } else {
     const imageFile = req.files.photo.path;
     cloudinary.uploader
@@ -43,7 +41,6 @@ function create(req, res) {
             place.populate("owner").then((populatedPlace) => {
               res.status(201).json(populatedPlace);
             });
-          })
           .catch((err) => {
             console.log(err);
             res.status(500).json(err);
@@ -102,4 +99,11 @@ function createReview(req, res) {
   });
 }
 
-export { index, show, create, update, createReview, deletePlace as delete };
+export { 
+  index, 
+  show, 
+  create, 
+  update, 
+  createReview, 
+  deletePlace as delete 
+}
