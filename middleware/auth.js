@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { Profile } from '../models/profile.js';
 
 const SECRET = process.env.SECRET;
 
@@ -23,4 +24,15 @@ function checkAuth(req, res, next) {
   return req.user ? next() : res.status(401).json({ msg: "Not Authorized" });
 }
 
-export { decodeUserFromToken, checkAuth };
+function isAdmin(req, res, next) {
+  console.log('IS ADMIN', req)
+  Profile.findById()
+  if (req.Profile.isAdmin === true ) {
+    console.log('LINE 31', req)
+  return next()
+  } else {
+    res.redirect('/')
+  }
+}
+
+export { decodeUserFromToken, checkAuth, isAdmin };

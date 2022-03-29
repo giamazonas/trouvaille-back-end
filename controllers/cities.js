@@ -132,4 +132,4 @@ function deleteCity(req, res) {
     });
 }
 
-export { index, show, create, update, addPlace, edit, deleteCity as delete };
+export { index, show, create, update, addPlace, edit, deleteCity as delete, };

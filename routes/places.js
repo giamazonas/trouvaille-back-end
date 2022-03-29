@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as placesCtrl from "../controllers/places.js";
-import { decodeUserFromToken, checkAuth } from "../middleware/auth.js";
+import { decodeUserFromToken, checkAuth, isAdmin } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.get("/:id", placesCtrl.show);
 router.use(decodeUserFromToken);
 router.post("/", checkAuth, placesCtrl.create);
 router.put("/:id", checkAuth, placesCtrl.update);
-router.delete("/:id", checkAuth, placesCtrl.delete);
+router.delete("/:id", checkAuth, isAdmin, placesCtrl.delete);
 
 router.post('/:id/comments', checkAuth, placesCtrl.createReview);
 
