@@ -1,5 +1,6 @@
-import jwt from "jsonwebtoken"
-import { Profile } from '../models/profile.js'
+import jwt from "jsonwebtoken";
+import { Profile } from "../models/profile.js";
+
 
 const SECRET = process.env.SECRET
 

@@ -8,15 +8,17 @@ const router = Router()
 router.get("/", citiesCtrl.index)
 
 /* ----------- Private Routes ----------- */
-router.use(decodeUserFromToken)
+
+router.use(decodeUserFromToken);
+router.post("/", checkAuth, isAdmin, citiesCtrl.create);
+router.get("/:id", checkAuth, citiesCtrl.show);
+router.put("/:id", checkAuth, isAdmin, citiesCtrl.update);
+router.patch("/:cityId/:placeId", checkAuth, citiesCtrl.addPlace);
+router.delete("/:id", checkAuth, isAdmin, citiesCtrl.delete);
+
+router.use(decodeUserFromToken);
 // router.use(isAdmin)
 
-router.post("/", checkAuth, isAdmin, citiesCtrl.create)
-router.get("/:id", checkAuth, citiesCtrl.show)
-router.put("/:id/edit", checkAuth, isAdmin, citiesCtrl.update)
-router.patch("/:cityId/:placeId", checkAuth, citiesCtrl.addPlace)
-router.put("/:id/edit", checkAuth, isAdmin, citiesCtrl.edit)
-router.delete("/:id", checkAuth, isAdmin, citiesCtrl.delete)
 
 export { 
   router 
