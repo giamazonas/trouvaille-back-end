@@ -22,39 +22,12 @@ function show(req, res) {
     });
 }
 
-// function show(req, res) {
-//   City.findById(req.params.id)
-//   .then((place) => {
-//     place.populate("city")
-//     .then((populatedPlace) => {
-//       console.log("::: POPULATEDPLACE SHOW FUNCTION  :::", populatedPlace)
-//       res.status(201).json(populatedPlace)
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//       res.json(err)
-//     })
-//   })
-// }
-
 function create(req, res) {
-  console.log('create places')
+  console.log("create places");
   req.body.owner = req.user.profile;
   if (req.body.photo === "undefined" || !req.files["photo"]) {
-    // console.log(':::req.body.city:::', req.body.city)
     delete req.body["photo"];
     Place.create(req.body)
-      // .then((place) => {
-      // TESTING ---------V
-
-      // City.patch(req.body.city, {$push: {places: place._id}})
-      // console.log(':::::::::::: city.findById(req.body.city) ::::::::::::',City.findByIdAndUpdate(req.body.city))
-      // City.findByIdAndUpdate(req.body.city, {palces: place._id})
-      // console.log("========= req.body.city place controller: ========", req.body.city)
-      // console.log("+++++++++ place    place controller:+++++++++", place)
-
-      // TESTING ---------^
-      // })
       .then((place) => res.json(place))
       .catch((err) => {
         console.log(err);
@@ -121,13 +94,15 @@ function deletePlace(req, res) {
 }
 
 function createReview(req, res) {
-  console.log("----CREATE REVIEW---");
+  const { comment, rating, _id } = req.body;
+  const form = {
+    comment: comment,
+    rating: parseInt(rating),
+  };
   Place.findById(req.params.id).then((place) => {
-    place.populate("reviews").push(req.body);
-    place.reviews.save(function (err) {
-      res.status().json(err);
-    });
-    console.log("test create review", place);
+    place.reviews.push();
+    place.save();
+    res.status(201).json(place);
   });
 }
 
