@@ -12,7 +12,7 @@ router.get("/:id", placesCtrl.show);
 router.use(decodeUserFromToken);
 router.post("/", checkAuth, placesCtrl.create);
 router.put("/:id", checkAuth, placesCtrl.update);
-router.delete("/:id", checkAuth, isAdmin, placesCtrl.delete);
+router.delete("/:id", checkAuth, placesCtrl.delete);
 
 router.post("/:id/reviews", checkAuth, placesCtrl.createReview);
 
