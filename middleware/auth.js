@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Profile } from '../models/profile.js';
+import { Profile } from "../models/profile.js";
 
 const SECRET = process.env.SECRET;
 
@@ -25,13 +25,11 @@ function checkAuth(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-  console.log('IS ADMIN', req)
-  Profile.findById()
-  if (req.Profile.isAdmin === true ) {
-    console.log('LINE 31', req)
-  return next()
+  Profile.findById();
+  if (req.Profile.isAdmin === true) {
+    return next();
   } else {
-    res.redirect('/')
+    res.redirect("/");
   }
 }
 
