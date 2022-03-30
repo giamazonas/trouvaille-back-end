@@ -14,6 +14,6 @@ router.post("/", checkAuth, placesCtrl.create);
 router.put("/:id", checkAuth, placesCtrl.update);
 router.delete("/:id", checkAuth, isAdmin, placesCtrl.delete);
 
-router.post('/:id', checkAuth, placesCtrl.createReview);
+router.post('/', checkAuth, placesCtrl.createReview);
 
 export { router };
