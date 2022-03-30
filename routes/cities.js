@@ -1,13 +1,14 @@
-import { Router } from "express";
-import * as citiesCtrl from "../controllers/cities.js";
-import { decodeUserFromToken, checkAuth, isAdmin } from "../middleware/auth.js";
+import { Router } from "express"
+import * as citiesCtrl from "../controllers/cities.js"
+import { decodeUserFromToken, checkAuth, isAdmin } from "../middleware/auth.js"
 
-const router = Router();
+const router = Router()
 
 /* ----------- Public Routes ----------- */
-router.get("/", citiesCtrl.index);
+router.get("/", citiesCtrl.index)
 
 /* ----------- Private Routes ----------- */
+
 router.use(decodeUserFromToken);
 router.post("/", checkAuth, isAdmin, citiesCtrl.create);
 router.get("/:id", checkAuth, citiesCtrl.show);
@@ -15,4 +16,10 @@ router.put("/:id", checkAuth, isAdmin, citiesCtrl.update);
 router.patch("/:cityId/:placeId", checkAuth, citiesCtrl.addPlace);
 router.delete("/:id", checkAuth, isAdmin, citiesCtrl.delete);
 
-export { router };
+router.use(decodeUserFromToken);
+// router.use(isAdmin)
+
+
+export { 
+  router 
+}
