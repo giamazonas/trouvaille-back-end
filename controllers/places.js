@@ -38,6 +38,7 @@ function show(req, res) {
 // }
 
 function create(req, res) {
+  console.log('create places')
   req.body.owner = req.user.profile;
   if (req.body.photo === "undefined" || !req.files["photo"]) {
     // console.log(':::req.body.city:::', req.body.city)
@@ -97,7 +98,7 @@ function update(req, res) {
     cloudinary.uploader
       .upload(imageFile, { tags: `${req.body.name}` })
       .then((image) => {
-        console.log(image);
+        // console.log(image);
         req.body.photo = image.url;
         Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((place) => {
@@ -120,7 +121,7 @@ function deletePlace(req, res) {
 }
 
 function createReview(req, res) {
-  console.log("CREATE REVIEW");
+  console.log("----CREATE REVIEW---");
   Place.findById(req.params.id).then((place) => {
     place.populate("reviews").push(req.body);
     place.reviews.save(function (err) {
