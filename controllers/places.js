@@ -91,7 +91,6 @@ function deletePlace(req, res) {
   Place.findByIdAndDelete(req.params.id)
     .then((place) => res.json(place))
     .catch((err) => res.json(err));
-    console.log('TESTING')
 }
 
 function createReview(req, res) {
