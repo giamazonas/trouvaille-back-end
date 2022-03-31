@@ -15,8 +15,7 @@
     "express-form-data": "^2.0.17",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12",
-    "morgan": "^1.10.0",
-    "react-map-gl": "^7.0.10"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",

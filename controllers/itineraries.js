@@ -1,18 +1,24 @@
 import { Itinerary } from "../models/itinerary.js"
 
 function index(req, res) {
-  console.log("itineraries")
+  // console.log('<><><> ITIN_INDEX_SHOW <><><>')
+  // req.body.owner = req.user.profile
+
   Itinerary.find({})
-    .populate("owner")
-    .then((itineraries) => {
-      res.json(itineraries)
-    })
-    .catch((err) => {
-      res.json(err)
-    })
+  .populate("owner")
+  .then(itineraries => {
+    // console.log('timePlace ----> ',itineraries)
+  })
+  // .then(itineraries => itineraries.timePlace.populate('places'))
+  //   .catch((err) => {
+  //     res.json(err)
+  //   })
 }
 
 function show(req, res) {
+  console.log('<><><> ITIN_CONTROLLER_SHOW <><><>')
+  req.body.owner = req.user.profile
+
   Itinerary.findById(req.params.id)
     .populate("owner")
     .then((itinerary) => {
@@ -28,43 +34,10 @@ function show(req, res) {
     })
 }
 
-// function create(req, res) {
-//   console.log('{}{}{} itineraries controller_create {}{}{}', req.body)
-
-//   Itinerary.create(req.body)
-//   .then(data => {
-//     console.log(data)
-//   })
-
-//   const{ time, places } = req.body
-//   if(places !== {}) {
-//     const form = {
-//       time: parseInt(time),
-//       places: places
-//     } 
-//     console.log(time)
-//   } else if(parseInt(time) === 24) {
-//     console.log('xxxxxxxxxxxxxxxxxxxxxxxx')
-//   }
-// }
-
-  // function createReview(req, res) {
-  //   const { comment, rating, _id } = req.body;
-  //   const form = {
-  //     comment: comment,
-  //     rating: parseInt(rating),
-  //   };
-  //   Place.findById(req.params.id).then((place) => {
-  //     place.reviews.push();
-  //     place.save();
-  //     res.status(201).json(place);
-  //   });
-  // }
 async function create(req, res) {
   if(Object.keys(req.body[0].length === 0)) delete req.body[0]
-
   req.body.owner = req.user.profile
-  console.log(req.body)
+  // console.log(req.body)
   const itinerary = await Itinerary.create({
     name: req.body['24'].name,
     owner: req.body.owner
@@ -73,7 +46,7 @@ async function create(req, res) {
   const keys = Object.keys(req.body)
   Object.values(req.body).forEach((item, i) => {
     if(keys[i] !== '24' && keys[i] !== 'owner' ) {
-      console.log(keys[i], item)
+      // console.log(keys[i], item)
       const time = keys[i]
       let obj = {}
       obj['time'] = time
