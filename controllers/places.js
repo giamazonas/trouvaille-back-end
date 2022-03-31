@@ -94,6 +94,7 @@ function deletePlace(req, res) {
 }
 
 function createReview(req, res) {
+  console.log('CREATE REVIEW IN CTRL', req.body)
   const { comment, rating, _id } = req.body;
   const form = {
     comment: comment,
@@ -103,6 +104,7 @@ function createReview(req, res) {
     place.reviews.push();
     place.save();
     res.status(201).json(place);
+    console.log('end of funciton')
   });
 }
 
