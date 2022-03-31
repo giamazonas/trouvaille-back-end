@@ -9,6 +9,7 @@ const router = Router();
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get("/", checkAuth, profilesCtrl.index)
-router.patch("/:profileId/:itineraryId", checkAuth, profilesCtrl.addItinerary);
+router.get("/itineraries/:id", checkAuth, profilesCtrl.showItineraries)
+router.patch("/:profileId/:itineraryId", checkAuth, profilesCtrl.addItinerary)
 
 export { router }

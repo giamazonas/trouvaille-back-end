@@ -1,37 +1,13 @@
 import { Itinerary } from "../models/itinerary.js"
 
 function index(req, res) {
-  // console.log('<><><> ITIN_INDEX_SHOW <><><>')
-  // req.body.owner = req.user.profile
 
-  Itinerary.find({})
-  .populate("owner")
-  .then(itineraries => {
-    // console.log('timePlace ----> ',itineraries)
-  })
-  // .then(itineraries => itineraries.timePlace.populate('places'))
-  //   .catch((err) => {
-  //     res.json(err)
-  //   })
 }
 
 function show(req, res) {
-  console.log('<><><> ITIN_CONTROLLER_SHOW <><><>')
   req.body.owner = req.user.profile
-
-  Itinerary.findById(req.params.id)
-    .populate("owner")
-    .then((itinerary) => {
-      console.log(itinerary)
-      res.render("itineraries/:id", {
-        itinerary,
-        title: "Itinerary",
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.redirect("/itineraries")
-    })
+  console.log(req.body)
+  Itinerary.find({})
 }
 
 async function create(req, res) {
