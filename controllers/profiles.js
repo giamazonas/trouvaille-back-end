@@ -9,4 +9,15 @@ function index(req, res) {
     })
 }
 
-export { index }
+function addItinerary(req, res) {
+  Profile.findByIdAndUpdate(res.req.params.profileId, {
+    $push: { itineraries: res.req.params.itineraryId },
+  }).then(() => {
+    console.log("ADD ITINERARY");
+  })
+}
+
+export { 
+  index,
+  addItinerary
+}
