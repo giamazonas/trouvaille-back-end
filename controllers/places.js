@@ -58,6 +58,7 @@ function update(req, res) {
     delete req.body["photo"];
     Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then((place) => {
+        console.log("first then ctl", req.params.id);
         place.populate("place").then((populatePlace) => {
           res.status(201).json(populatePlace);
         });
@@ -76,6 +77,7 @@ function update(req, res) {
         Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((place) => {
             place.populate("owner").then((populatedPlace) => {
+              console.log("pop place", populatedPlace);
               res.status(201).json(populatedPlace);
             });
           })
@@ -88,9 +90,16 @@ function update(req, res) {
 }
 
 function deletePlace(req, res) {
+  console.log("DELTE PLC CNTRLR HIT");
   Place.findByIdAndDelete(req.params.id)
-    .then((place) => res.json(place))
-    .catch((err) => res.json(err));
+    .then((deletedPlace) => {
+      console.log("DPC--", deletedPlace);
+      res.json(deletedPlace);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
 }
 
 function createReview(req, res) {
