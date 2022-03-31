@@ -44,6 +44,7 @@ function create(req, res) {
             place.populate("owner").then((populatedPlace) => {
               res.status(201).json(populatedPlace);
             });
+          })
           .catch((err) => {
             console.log(err);
             res.status(500).json(err);
