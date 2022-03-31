@@ -1,4 +1,4 @@
-import { Itinerary } from "../models/itinerary.js";
+import { Itinerary } from "../models/itinerary.js"
 
 function index(req, res) {
   console.log("itineraries")
@@ -16,29 +16,30 @@ function show(req, res) {
   Itinerary.findById(req.params.id)
     .populate("owner")
     .then((itinerary) => {
-      console.log(itinerary);
+      console.log(itinerary)
       res.render("itineraries/:id", {
         itinerary,
         title: "Itinerary",
-      });
+      })
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err)
       res.redirect("/itineraries")
     })
 }
 
 function create(req, res) {
-  Itinerary.create(req.body)
-    .then((itinerary) => {
-      itinerary.populate("owner").then((populatedItinerary) => {
-        res.status(201).json(populatedItinerary)
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.status(500).json(err)
-    })
+  console.log('{}{}{} itineraries controller_create {}{}{}',req)
+  // Itinerary.create(req.body)
+  //   .then((itinerary) => {
+  //     itinerary.populate("owner").then((populatedItinerary) => {
+  //       res.status(201).json(populatedItinerary)
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //     res.status(500).json(err)
+  //   });
 }
 
 function update(req, res) {}

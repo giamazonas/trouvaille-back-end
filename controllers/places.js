@@ -1,13 +1,15 @@
-import { Place } from "../models/place.js"
-import { City } from "../models/city.js"
-import { v2 as cloudinary } from "cloudinary"
+import { Place } from "../models/place.js";
+import { City } from "../models/city.js";
+import { v2 as cloudinary } from "cloudinary";
 
 function index(req, res) {
   Place.find({})
-    .then((places) => res.json(places))
+    .populate("city")
+    .then((places) => {
+      res.json(places);
+    })
     .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+      res.json(err);
     });
 }
 
@@ -15,21 +17,22 @@ function show(req, res) {
   Place.findById(req.params.id)
     .then((place) => res.json(place))
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.json(err);
-    })
+    });
 }
 
 function create(req, res) {
-      // console.log("+++++++++ place    place controller:+++++++++", place)
-
-      // TESTING ---------^
-    // })
-    .then((place) => res.json(place))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  console.log("create places");
+  req.body.owner = req.user.profile;
+  if (req.body.photo === "undefined" || !req.files["photo"]) {
+    delete req.body["photo"];
+    Place.create(req.body)
+      .then((place) => res.json(place))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   } else {
     const imageFile = req.files.photo.path;
     cloudinary.uploader
@@ -67,7 +70,7 @@ function update(req, res) {
     cloudinary.uploader
       .upload(imageFile, { tags: `${req.body.name}` })
       .then((image) => {
-        console.log(image);
+        // console.log(image);
         req.body.photo = image.url;
         Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((place) => {
@@ -90,20 +93,16 @@ function deletePlace(req, res) {
 }
 
 function createReview(req, res) {
-  console.log("CREATE REVIEW");
-  City.findById(req.params.id, function (err, city) {
-    city.comment.push(req.body);
-    city.save(function (err) {
-      res.redirect(`/city/${city._id}`);
-    });
+  const { comment, rating, _id } = req.body;
+  const form = {
+    comment: comment,
+    rating: parseInt(rating),
+  };
+  Place.findById(req.params.id).then((place) => {
+    place.reviews.push();
+    place.save();
+    res.status(201).json(place);
   });
 }
 
-export { 
-  index, 
-  show, 
-  create, 
-  update, 
-  createReview, 
-  deletePlace as delete 
-}
+export { index, show, create, update, createReview, deletePlace as delete };
