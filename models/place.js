@@ -31,6 +31,7 @@ const placeSchema = new Schema(
         "bowling",
         "arcade",
         "shop",
+        "other",
       ],
     },
 

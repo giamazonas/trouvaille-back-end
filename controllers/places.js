@@ -101,9 +101,9 @@ function createReview(req, res) {
     rating: parseInt(rating),
   }
   Place.findById(req.params.id).then((place) => {
-    place.reviews.push(form)
-    place.save()
-    res.status(201).json(place)
+    place.reviews.push(form);
+    place.save();
+    res.status(201).json(place);
     console.log('end of funciton')
   })
 }
