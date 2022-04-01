@@ -19,13 +19,12 @@ async function create(req, res) {
 
   const keys = Object.keys(req.body);
   Object.values(req.body).forEach((item, i) => {
-    if (keys[i] !== "24" && keys[i] !== "owner") {
-      // console.log(keys[i], item)
-      const time = keys[i];
-      let obj = {};
-      obj["time"] = time;
-      obj["places"] = item;
-      itinerary.timePlace.push(obj);
+    if(keys[i] !== '24' && keys[i] !== 'owner' ) {
+      const time = keys[i]
+      let obj = {}
+      obj['time'] = time
+      obj['places'] = item
+      itinerary.timePlace.push(obj)
     }
   });
   itinerary.save();
