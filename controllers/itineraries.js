@@ -13,7 +13,7 @@ function show(req, res) {
 async function create(req, res) {
   if(Object.keys(req.body[0].length === 0)) delete req.body[0]
   req.body.owner = req.user.profile
-  // console.log(req.body)
+
   const itinerary = await Itinerary.create({
     name: req.body['24'].name,
     owner: req.body.owner
@@ -22,7 +22,6 @@ async function create(req, res) {
   const keys = Object.keys(req.body)
   Object.values(req.body).forEach((item, i) => {
     if(keys[i] !== '24' && keys[i] !== 'owner' ) {
-      // console.log(keys[i], item)
       const time = keys[i]
       let obj = {}
       obj['time'] = time

@@ -27,16 +27,6 @@ function showItineraries(req, res) {
     res.status(500).json(err)
   })
 }
-  // .then(data => {
-  //   console.log(data)
-    // data.itineraries.forEach((itinerary, i) => {
-      // console.log(itinerary)
-      // itinerary.timePlace.forEach(place => {
-      //   console.log(place.places)
-      //   console.log(place.time)
-      // })
-    // })
-  // })
 
 export { 
   index,

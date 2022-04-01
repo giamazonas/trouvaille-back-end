@@ -26,12 +26,9 @@ function checkAuth(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-  console.log('@@@@@ isAdmin_req.user @@@@@',req.user)
   Profile.findById(req.user?.profile)
   .then(profile => {
-    console.log('%%%%% isAdmin_profile %%%%%', profile)
     if(!profile.isAdmin) {
-      console.log('not an admin')
       res.redirect('/')
     } else {
       console.log('ADMIN ACCESS')
