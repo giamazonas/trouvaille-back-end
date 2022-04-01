@@ -94,15 +94,17 @@ function deletePlace(req, res) {
 }
 
 function createReview(req, res) {
+  console.log('CREATE REVIEW IN CTRL', req.body)
   const { comment, rating, _id } = req.body;
   const form = {
     comment: comment,
     rating: parseInt(rating),
   };
   Place.findById(req.params.id).then((place) => {
-    place.reviews.push();
+    place.reviews.push(form);
     place.save();
     res.status(201).json(place);
+    console.log('end of funciton')
   });
 }
 

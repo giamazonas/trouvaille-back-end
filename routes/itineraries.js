@@ -10,7 +10,7 @@ router.get("/:id", itinerariesCtrl.show);
 
 /* ----------- Private Routes ----------- */
 router.use(decodeUserFromToken);
-router.post("/", checkAuth, itinerariesCtrl.create);
+router.post("/add", checkAuth, itinerariesCtrl.create);
 router.put("/:id", checkAuth, itinerariesCtrl.update);
 router.delete("/:id", checkAuth, itinerariesCtrl.delete);
 
