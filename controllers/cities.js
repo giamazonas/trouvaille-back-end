@@ -20,7 +20,6 @@ function show(req, res) {
         res.status(201).json(populatedCity)
       })
       .catch((err) => {
-        console.log(err)
         res.json(err)
       })
   })
@@ -37,7 +36,6 @@ function create(req, res) {
         })
       })
       .catch((err) => {
-        console.log(err)
         res.status(500).json(err)
       })
   } else {
@@ -53,7 +51,6 @@ function create(req, res) {
             })
           })
           .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
           })
       })
@@ -64,7 +61,6 @@ function addPlace(req, res) {
   City.findByIdAndUpdate(res.req.params.cityId, {
     $push: { places: res.req.params.placeId },
   }).then(() => {
-    console.log("ADD PLACE")
   })
 }
 
@@ -78,7 +74,6 @@ function update(req, res) {
         })
       })
       .catch((err) => {
-        console.log(err)
         res.status(500).json(err)
       })
   } else {
@@ -94,7 +89,6 @@ function update(req, res) {
             })
           })
           .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
           })
       })
@@ -105,7 +99,6 @@ function edit(req, res) {
   City.findById(req.params.id, req.body)
     .then((city) => res.json(city))
     .catch((err) => {
-      console.log(err);
       res.status(500).json(err);
     });
 }
@@ -116,7 +109,6 @@ function deleteCity(req, res) {
       res.json(deletedCity);
     })
     .catch((err) => {
-      console.log(err);
       res.json(err);
     });
 }

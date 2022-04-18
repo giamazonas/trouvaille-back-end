@@ -4,14 +4,12 @@ function index(req, res) {}
 
 function show(req, res) {
   req.body.owner = req.user.profile;
-  console.log(req.body);
   Itinerary.find({});
 }
 
 async function create(req, res) {
   if (Object.keys(req.body[0].length === 0)) delete req.body[0];
   req.body.owner = req.user.profile;
-  // console.log(req.body)
   const itinerary = await Itinerary.create({
     name: req.body["24"].name,
     owner: req.body.owner,

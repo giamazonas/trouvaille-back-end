@@ -17,7 +17,6 @@ function show(req, res) {
   Place.findById(req.params.id)
     .then((place) => res.json(place))
     .catch((err) => {
-      console.log(err)
       res.json(err)
     })
 }
@@ -29,7 +28,6 @@ function create(req, res) {
     Place.create(req.body)
       .then((place) => res.json(place))
       .catch((err) => {
-        console.log(err)
         res.status(500).json(err)
       })
   } else {
@@ -45,7 +43,6 @@ function create(req, res) {
             })
           })
           .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
           })
       })
@@ -62,7 +59,6 @@ function update(req, res) {
         })
       })
       .catch((err) => {
-        console.log(err)
         res.status(500).json(err)
       })
   } else {
@@ -78,7 +74,6 @@ function update(req, res) {
             })
           })
           .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
           });
       });
@@ -88,11 +83,9 @@ function update(req, res) {
 function deletePlace(req, res) {
   Place.findByIdAndDelete(req.params.id)
     .then((deletedPlace) => {
-      console.log("DPC--", deletedPlace)
       res.json(deletedPlace)
     })
     .catch((err) => {
-      console.log(err)
       res.json(err)
     });
 }
