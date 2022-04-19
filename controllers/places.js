@@ -84,7 +84,7 @@ function update(req, res) {
     cloudinary.uploader
       .upload(imageFile, { tags: `${req.body.name}` })
       .then((image) => {
-        req.body.photo = image.url;
+        req.body.photo = image.url
         Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((place) => {
             place.populate("owner").then((populatedPlace) => {
@@ -105,7 +105,7 @@ function deletePlace(req, res) {
     })
     .catch((err) => {
       res.json(err)
-    });
+    })
 }
 
 function createReview(req, res) {
