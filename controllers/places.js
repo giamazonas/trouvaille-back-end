@@ -66,7 +66,7 @@ function update(req, res) {
     cloudinary.uploader
       .upload(imageFile, { tags: `${req.body.name}` })
       .then((image) => {
-        req.body.photo = image.url;
+        req.body.photo = image.url
         Place.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then((place) => {
             place.populate("owner").then((populatedPlace) => {
@@ -75,8 +75,8 @@ function update(req, res) {
           })
           .catch((err) => {
             res.status(500).json(err)
-          });
-      });
+          })
+      })
   }
 }
 
@@ -87,7 +87,7 @@ function deletePlace(req, res) {
     })
     .catch((err) => {
       res.json(err)
-    });
+    })
 }
 
 function createReview(req, res) {
@@ -95,16 +95,15 @@ function createReview(req, res) {
   const form = {
     comment: comment,
     rating: parseInt(rating),
-  };
+  }
   Place.findById(req.params.id).then((place) => {
     place.reviews.push(form)
     place.save()
     res.status(201).json(place)
-  });
+})
 }
 
 export { index, 
-  show, 
   create, 
   update, 
   createReview, 
