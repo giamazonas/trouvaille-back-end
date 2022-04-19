@@ -52,7 +52,7 @@ function changePassword(req, res) {
     if (!user) return res.status(401).json({ err: "User not found" })
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
-        user.password = req.body.newPw;
+        user.password = req.body.newPw
         user.save().then(() => {
           const token = createJWT(user)
           res.json({ token })
