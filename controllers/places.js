@@ -101,6 +101,7 @@ function createReview(req, res) {
     place.save();
     res.status(201).json(place);
     console.log('end of funciton')
+})
 }
 
 export { index, 
