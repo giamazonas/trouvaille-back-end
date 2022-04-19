@@ -99,18 +99,18 @@ function edit(req, res) {
   City.findById(req.params.id, req.body)
     .then((city) => res.json(city))
     .catch((err) => {
-      res.status(500).json(err);
-    });
+      res.status(500).json(err)
+    })
 }
 
 function deleteCity(req, res) {
   City.findByIdAndDelete(req.params.id)
     .then((deletedCity) => {
-      res.json(deletedCity);
+      res.json(deletedCity)
     })
     .catch((err) => {
-      res.json(err);
-    });
+      res.json(err)
+    })
 }
 
 export { 
