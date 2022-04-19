@@ -1,5 +1,9 @@
 import { City } from "../models/city.js"
 import { v2 as cloudinary } from "cloudinary"
+import fetch from 'node-fetch'
+
+const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN
+const API_URL = 'https://api.mapbox.com/geocoding/v5/'
 
 function index(req, res) {
   City.find({})
@@ -25,8 +29,22 @@ function show(req, res) {
   })
 }
 
+async function getCoordinates(cityInfo) {
+  return fetch(cityInfo).then((res) => res.json())
+}
+
 function create(req, res) {
   req.body.owner = req.user.profile
+  
+  let cityLatLong = `${API_URL}mapbox.places/${req.body.city.replaceAll(' ', '%20')}/${req.body.state}.json?&access_token=${MAPBOX_TOKEN}`
+  getCoordinates(cityLatLong)
+  .then(data => data.features)
+  .then(data => data[0].center)
+  .then(data => {
+    req.body.lat = data[1]
+    req.body.long = data[0]
+  })
+
   if (req.body.photo === "undefined" || !req.files["photo"]) {
     delete req.body["photo"]
     City.create(req.body)
@@ -51,6 +69,7 @@ function create(req, res) {
             })
           })
           .catch((err) => {
+            console.log('nope nope nope nope nope nope nope nope nope nope ')
             res.status(500).json(err)
           })
       })

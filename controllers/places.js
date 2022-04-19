@@ -1,6 +1,9 @@
 import { Place } from "../models/place.js"
-import { City } from "../models/city.js"
 import { v2 as cloudinary } from "cloudinary"
+import fetch from 'node-fetch'
+
+const MAPBOX_TOKEN = process.env.MAPBOX_ACCESS_TOKEN
+const API_URL = 'https://api.mapbox.com/geocoding/v5/'
 
 function index(req, res) {
   Place.find({})
@@ -21,7 +24,22 @@ function show(req, res) {
     })
 }
 
+async function getCoordinates(cityInfo) {
+  return fetch(cityInfo).then((res) => res.json())
+}
+
 function create(req, res) {
+  let placeLatLong = `${API_URL}mapbox.places/${req.body.city.replaceAll(' ', '%20')}/${req.body.address.replaceAll(' ', '%20')}.json?&access_token=${MAPBOX_TOKEN}`
+
+  getCoordinates(placeLatLong)
+    .then(data => data.features)
+    .then(data => data[0].center)
+    .then(data => {
+      req.body.lat = data[1]
+      req.body.long = data[0]
+      console.log(req.body)
+    })
+
   req.body.owner = req.user.profile
   if (req.body.photo === "undefined" || !req.files["photo"]) {
     delete req.body["photo"]
@@ -75,8 +93,8 @@ function update(req, res) {
           })
           .catch((err) => {
             res.status(500).json(err)
-          });
-      });
+          })
+      })
   }
 }
 
@@ -95,15 +113,16 @@ function createReview(req, res) {
   const form = {
     comment: comment,
     rating: parseInt(rating),
-  };
+  }
   Place.findById(req.params.id).then((place) => {
     place.reviews.push(form)
     place.save()
     res.status(201).json(place)
-  });
+  })
 }
 
-export { index, 
+export { 
+  index, 
   show, 
   create, 
   update, 

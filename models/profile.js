@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const profileSchema = new mongoose.Schema(
   {
@@ -15,6 +15,6 @@ const profileSchema = new mongoose.Schema(
   }
 );
 
-const Profile = mongoose.model("Profile", profileSchema);
+const Profile = mongoose.model("Profile", profileSchema)
 
-export { Profile };
+export { Profile }

@@ -17,6 +17,14 @@ const citySchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Profile",
     },
+    lat: {
+      type: Number,
+      required: true
+    },
+    long: {
+      type: Number,
+      required: true
+    },
     places: [
       {
         type: Schema.Types.ObjectId,
