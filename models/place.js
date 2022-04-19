@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const reviewSchema = new Schema(
   {
@@ -34,7 +34,14 @@ const placeSchema = new Schema(
         "other",
       ],
     },
-
+    lat: {
+      type: Number,
+      required: true
+    },
+    long: {
+      type: Number,
+      required: true
+    },
     url: { type: String },
     reviews: [reviewSchema],
     photo: { type: [String] },
@@ -42,8 +49,8 @@ const placeSchema = new Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Place = mongoose.model("Place", placeSchema);
+const Place = mongoose.model("Place", placeSchema)
 
-export { Place };
+export { Place }

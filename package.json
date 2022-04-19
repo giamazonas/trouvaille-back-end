@@ -15,6 +15,12 @@
     "express-form-data": "^2.0.17",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.2.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
   }
 }
