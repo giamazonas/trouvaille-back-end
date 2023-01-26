@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "netlify deploy --prod",
     "start": "node ./bin/www.js"
   },
   "dependencies": {
