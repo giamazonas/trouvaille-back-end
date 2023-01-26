@@ -5,8 +5,3 @@
     to="/.netlify/functions/api:splat"
     from="/*"
     status=200 
-    to="https://spontaneous-faloodeh-8cb795.netlify.app/*
-    from="/api/*"
-    status = 200
-    force = true
-    headers = {X-From = "Netlify"}
